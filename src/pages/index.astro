@@ -1,11 +1,308 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Base from '../layouts/Base.astro'
+import Nav  from '../components/Nav.astro'
+import Card from '../components/Card.astro'
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const proyectos = [
+  {
+    titulo:    "Identidad Visual — Marca X",
+    categoria: "Branding",
+    imagen:    "https://images.unsplash.com/photo-1634942537034-2531766767d1?w=800&q=80",
+    slug:      "marca-x",
+  },
+  {
+    titulo:    "Sitio Web — Estudio Y",
+    categoria: "Diseño Web",
+    imagen:    "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?w=800&q=80",
+    slug:      "estudio-y",
+  },
+  {
+    titulo:    "Campaña Gráfica — Proyecto Z",
+    categoria: "Diseño Gráfico",
+    imagen:    "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+    slug:      "proyecto-z",
+  },
+  {
+    titulo:    "Sistema de Marca — Cliente W",
+    categoria: "Branding",
+    imagen:    "https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&q=80",
+    slug:      "cliente-w",
+  },
+]
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<Base titulo="Tu Nombre — Diseñadora">
+  <Nav />
+
+  <!-- HERO -->
+  <section id="inicio" class="hero">
+    <div class="hero-inner">
+      <p class="eyebrow fade-up">Diseño Gráfico & Web</p>
+      <h1 class="fade-up" style="animation-delay:.15s">
+        Diseño que<br/>
+        <em>comunica</em><br/>
+        con precisión.
+      </h1>
+      <p class="bajada fade-up" style="animation-delay:.3s">
+        Branding, identidad visual y experiencias web<br/>
+        para marcas que quieren destacar.
+      </p>
+      <a href="#proyectos" class="cta fade-up" style="animation-delay:.45s">
+        Ver proyectos
+      </a>
+    </div>
+    <div class="hero-numero">01</div>
+  </section>
+
+  <!-- PROYECTOS -->
+  <section id="proyectos" class="proyectos">
+    <div class="seccion-header">
+      <span class="numero">02</span>
+      <h2>Proyectos</h2>
+    </div>
+    <div class="grid">
+      {proyectos.map((p, i) => (
+        <Card {...p} index={i} />
+      ))}
+    </div>
+  </section>
+
+  <!-- SOBRE MÍ -->
+  <section id="sobre-mi" class="sobre-mi">
+    <div class="seccion-header">
+      <span class="numero">03</span>
+      <h2>Sobre mí</h2>
+    </div>
+    <div class="sobre-grid">
+      <div class="sobre-imagen">
+        <img
+          src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&q=80"
+          alt="Foto de perfil"
+        />
+      </div>
+      <div class="sobre-texto">
+        <p class="grande">
+          Soy diseñadora especializada en identidad visual y diseño web.
+        </p>
+        <p>
+          Con más de X años de experiencia, he colaborado con estudios, agencias y marcas independientes en proyectos que van desde el naming hasta el diseño de interfaces.
+        </p>
+        <ul class="skills">
+          <li>Branding & Identidad</li>
+          <li>Diseño Web</li>
+          <li>Diseño Gráfico</li>
+          <li>Sistemas de Diseño</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="contacto">
+    <div class="seccion-header">
+      <span class="numero">04</span>
+      <h2>Contacto</h2>
+    </div>
+    <div class="contacto-inner">
+      <p class="grande">¿Tienes un proyecto en mente?</p>
+      <a href="mailto:hola@tunombre.com" class="email-link">
+        hola@tunombre.com
+      </a>
+      <div class="redes">
+        <a href="https://instagram.com" target="_blank">Instagram</a>
+        <a href="https://linkedin.com"  target="_blank">LinkedIn</a>
+        <a href="https://behance.net"   target="_blank">Behance</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© {new Date().getFullYear()} Tu Nombre</span>
+    <span>Diseño & Desarrollo propio</span>
+  </footer>
+</Base>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-end;
+    padding: 0 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-inner { max-width: 700px; }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gris);
+    margin-bottom: 1.5rem;
+  }
+
+  h1 {
+    font-family: var(--fuente-display);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 300;
+    line-height: 1.05;
+    margin-bottom: 2rem;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--acento);
+  }
+
+  .bajada {
+    max-width: 420px;
+    color: var(--gris);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    margin-bottom: 3rem;
+  }
+
+  .cta {
+    display: inline-block;
+    border: 1px solid var(--negro);
+    padding: 0.9rem 2.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: background 0.3s, color 0.3s;
+  }
+  .cta:hover { background: var(--negro); color: var(--blanco); }
+
+  .hero-numero {
+    position: absolute;
+    right: 4rem;
+    bottom: 6rem;
+    font-family: var(--fuente-display);
+    font-size: 10rem;
+    font-weight: 300;
+    color: rgba(15,15,15,0.05);
+    line-height: 1;
+    user-select: none;
+  }
+
+  section { padding: 8rem 4rem; }
+
+  .seccion-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+    border-top: 1px solid rgba(15,15,15,0.12);
+    padding-top: 2rem;
+  }
+
+  .numero {
+    font-family: var(--fuente-display);
+    font-size: 0.9rem;
+    color: var(--gris);
+  }
+
+  h2 {
+    font-family: var(--fuente-display);
+    font-weight: 300;
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem 4rem;
+  }
+
+  .sobre-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .sobre-imagen img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    filter: grayscale(20%);
+  }
+
+  .grande {
+    font-family: var(--fuente-display);
+    font-size: 1.6rem;
+    font-weight: 300;
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+  }
+
+  .sobre-texto p:last-of-type {
+    color: var(--gris);
+    margin-bottom: 2.5rem;
+  }
+
+  .skills {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+  .skills li {
+    border: 1px solid rgba(15,15,15,0.2);
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .contacto-inner { text-align: center; padding: 4rem 0; }
+
+  .contacto-inner .grande {
+    font-size: clamp(2rem, 5vw, 4rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .email-link {
+    display: inline-block;
+    font-family: var(--fuente-display);
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    font-style: italic;
+    color: var(--acento);
+    border-bottom: 1px solid var(--acento);
+    padding-bottom: 0.2rem;
+    margin-bottom: 3rem;
+    transition: opacity 0.3s;
+  }
+  .email-link:hover { opacity: 0.6; }
+
+  .redes {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+  }
+  .redes a {
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gris);
+    transition: color 0.3s;
+  }
+  .redes a:hover { color: var(--negro); }
+
+  footer {
+    border-top: 1px solid rgba(15,15,15,0.12);
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    color: var(--gris);
+  }
+
+  @media (max-width: 900px) {
+    .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .sobre-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-numero { display: none; }
+    footer { padding: 2rem 1.5rem; }
+  }
+</style>

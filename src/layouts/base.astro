@@ -1,0 +1,78 @@
+---
+const { titulo = "Tu Nombre — Diseñadora" } = Astro.props
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{titulo}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <slot />
+</body>
+</html>
+
+<style is:global>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --negro:    #0f0f0f;
+    --blanco:   #f7f5f2;
+    --gris:     #9a9690;
+    --acento:   #c8a96e;
+    --fuente-display: 'Cormorant Garamond', serif;
+    --fuente-body:    'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--blanco);
+    color: var(--negro);
+    font-family: var(--fuente-body);
+    font-weight: 300;
+    font-size: 1rem;
+    line-height: 1.7;
+    cursor: none;
+  }
+
+  /* Cursor personalizado */
+  .cursor {
+    width: 10px; height: 10px;
+    background: var(--negro);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease, background 0.2s;
+  }
+  .cursor.hover { transform: scale(4); background: var(--acento); opacity: 0.5; }
+
+  a { color: inherit; text-decoration: none; }
+  img { display: block; max-width: 100%; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.8s ease forwards; }
+</style>
+
+<div class="cursor" id="cursor"></div>
+
+<script>
+  const cursor = document.getElementById('cursor')
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX - 5 + 'px'
+    cursor.style.top  = e.clientY - 5 + 'px'
+  })
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hover'))
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hover'))
+  })
+</script>
